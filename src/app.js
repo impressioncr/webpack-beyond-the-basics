@@ -1,9 +1,12 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React, { Component } from 'react'
+import Counter from './counter'
+import { hot } from 'react-hot-loader'
 
-ReactDom.render(
-  <div>
-    Hello, from react!
-  </div>,
-  document.getElementById("react-root")
-)
+class App extends Component {
+
+  render() {
+    return <Counter />
+  }
+}
+
+export default hot(module)(App)
