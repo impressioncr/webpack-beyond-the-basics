@@ -41,7 +41,19 @@ module.exports = {
           },
           {
             loader: 'css-loader'
+          },
+          { 
+            loader: "postcss-loader",
           }
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "postcss-loader" },
+          { loader: "stylus-loader" }
         ]
       },
       {
