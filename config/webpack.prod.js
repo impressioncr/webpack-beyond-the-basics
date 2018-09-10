@@ -5,7 +5,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
-const BrotliPlugin = require("brotli-webpack-plugin")
 
 module.exports = {
   entry: {
@@ -89,6 +88,5 @@ module.exports = {
     new CompressionPlugin({
       algorithm: "gzip"
     }),
-    new BrotliPlugin()
   ]
 }
