@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config=config/webpack.dev.js",
-    "build": "rimraf dist && NODE_ENV=production webpack --config=config/webpack.prod.js",
+    "build": "rimraf dist && NODE_ENV=production webpack --progress --config=config/webpack.prod.js",
     "dev": "nodemon --inspect --watch config --watch src/server src/server/main.js",
     "prod": "NODE_ENV=production node src/server/main.js"
   },
