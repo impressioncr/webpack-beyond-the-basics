@@ -1,4 +1,9 @@
-require('./main.css')
-require('./images/link.jpg')
-require('react')
-console.log(`Environment is ${process.env.NODE_ENV}`)
+import React from 'react'
+import ReactDom from 'react-dom'
+import App from './app'
+import './main.css'
+
+ReactDom.render(
+  <App />,
+  document.getElementById("react-root")
+)
