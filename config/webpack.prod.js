@@ -9,8 +9,8 @@ const CompressionPlugin = require("compression-webpack-plugin")
 module.exports = {
   entry: {
     main: [
-      './src/index.js'
-    ]
+      './src/index.js',
+    ],
   },
   mode: 'production',
   output: {
@@ -18,13 +18,17 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/'
   },
-  devServer: {
-    port: 3000,
-    contentBase: 'dist',
-    overlay: true,
-    hot: true,
-    stats: {
-      colors: true
+  optimization: {
+    splitChunks: {
+      automaticNameDelimiter: "-",
+      cacheGroups: {
+        vendor: {
+          name: "vendor",
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "initial",
+          minChunks: 1
+        }
+      }
     }
   },
   module: {
@@ -81,7 +85,7 @@ module.exports = {
       }
     }),
     new HTMLWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
     }),
     new UglifyJSPlugin(),
     new CompressionPlugin({
