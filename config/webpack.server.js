@@ -1,31 +1,35 @@
 const path = require('path')
 const webpack = require('webpack')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+const NodeExternals = require('webpack-node-externals')
+
 
 module.exports = {
   entry: {
-    main: [
-      'webpack-hot-middleware/client?reload=true', 
-      './src/index.js'
-    ]
+    server: [
+      './src/server/main.js',
+    ],
   },
-  mode: 'development',
+  mode: 'production',
   output: {
     filename: '[name]-bundle.js',
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/'
+    path: path.resolve(__dirname, '../build'),
   },
-  devServer: {
-    port: 3000,
-    contentBase: 'dist',
-    overlay: true,
-    hot: true,
-    stats: {
-      colors: true
+  target: 'node',
+  externals: NodeExternals(),
+  optimization: {
+    splitChunks: {
+      automaticNameDelimiter: "-",
+      cacheGroups: {
+        vendor: {
+          name: "vendor",
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "initial",
+          minChunks: 1
+        }
+      }
     }
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -41,7 +45,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCSSExtractPlugin.loader,
           },
           {
             loader: 'css-loader'
@@ -70,18 +74,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("development")
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
-    }),
-    // new HTMLWebpackPlugin({
-    //   template: './src/index.html'
-    // }),
-    // new BundleAnalyzerPlugin({
-    //   generateStatsFile: true
-    // })
+    })
   ]
 }

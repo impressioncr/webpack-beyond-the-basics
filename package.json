@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config=config/webpack.dev.js",
-    "build": "rimraf dist && NODE_ENV=production webpack --progress --config=config/webpack.prod.js",
     "dev": "nodemon --inspect --watch config --watch src/server src/server/main.js",
-    "prod": "NODE_ENV=production node src/server/main.js"
+    "build": "rimraf dist && BABEL_ENV=production webpack --progress --config=config/webpack.prod.js --env.NODE_ENV=production",
+    "build:server": "NODE_ENV=production webpack --progress --config=config/webpack.server.js --env.NODE_ENV=production --watch",
+    "prod": "NODE_ENV=production node src/server/main.js",
+    "prod:server": "NODE_ENV=production node build/server-bundle.js",
+    "start": "webpack-dev-server --config=config/webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +43,7 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-middleware": "^3.2.0",
     "webpack-dev-server": "^3.1.8",
-    "webpack-hot-middleware": "^2.23.1"
+    "webpack-hot-middleware": "^2.23.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }

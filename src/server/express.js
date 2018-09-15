@@ -1,9 +1,14 @@
-const express = require('express')
-const path = require('path')
+import express from 'express'
+import path from 'path'
+import React from 'React'
+import ReactDOMServer from 'react-dom/server'
+import App from '../app'
+
 
 const server = express()
 
 const isProd = process.env.NODE_ENV === "production"
+console.info('isProd', isProd)
 
 if (!isProd) {
   const webpack = require('webpack')
@@ -30,6 +35,23 @@ const expressStaticGzip = require('express-static-gzip')
 server.use(expressStaticGzip('dist', {
   enableBrotli: true
 }))
+
+server.get('*', (req, res) => {
+  res.send(`
+    <html>
+      <head>
+        <link href="main.css" rel="stylesheet" />
+      </head>
+      <body>
+        <div id="react-root">
+          ${ReactDOMServer.renderToString(<App />)}
+        </div>
+        <script src="vendor-bundle.js"></script>
+        <script src="main-bundle.js"></script>
+      </body>
+    </html>
+  `)
+})
 
 const PORT = process.env.PORT || 8080
 server.listen(PORT, () => {
