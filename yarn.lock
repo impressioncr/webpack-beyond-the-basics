@@ -4654,6 +4654,10 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "http://registry.npm.taobao.org/require-directory/download/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
 
+require-from-string@^2.0.1:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/require-from-string/download/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
+
 require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/require-main-filename/download/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
@@ -4966,7 +4970,7 @@ source-map-resolve@^0.5.0:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@^0.5.9:
+source-map-support@^0.5.3, source-map-support@^0.5.9:
   version "0.5.9"
   resolved "http://registry.npm.taobao.org/source-map-support/download/source-map-support-0.5.9.tgz#41bc953b2534267ea2d605bccfa7bfa3111ced5f"
   dependencies:
@@ -5628,12 +5632,25 @@ webpack-hot-middleware@^2.23.1:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
+webpack-hot-server-middleware@^0.5.0:
+  version "0.5.0"
+  resolved "http://registry.npm.taobao.org/webpack-hot-server-middleware/download/webpack-hot-server-middleware-0.5.0.tgz#c3a3137e2af2c926485d1c8126c2aad81d35b78c"
+  dependencies:
+    debug "^3.1.0"
+    require-from-string "^2.0.1"
+    source-map-support "^0.5.3"
+    yarn "^1.5.1"
+
 webpack-log@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/webpack-log/download/webpack-log-2.0.0.tgz#5b7928e0637593f119d32f6227c1e0ac31e1b47f"
   dependencies:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
+
+webpack-mild-compile@^3.2.0:
+  version "3.2.0"
+  resolved "http://registry.npm.taobao.org/webpack-mild-compile/download/webpack-mild-compile-3.2.0.tgz#84141a00a95ac3c2523a2f3c8f5618a0ea9355aa"
 
 webpack-node-externals@^1.7.2:
   version "1.7.2"
@@ -5786,3 +5803,7 @@ yargs@12.0.2, yargs@^12.0.1:
     which-module "^2.0.0"
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^10.1.0"
+
+yarn@^1.5.1:
+  version "1.9.4"
+  resolved "http://registry.npm.taobao.org/yarn/download/yarn-1.9.4.tgz#3b82d8446b652775723900b470d966861976924b"

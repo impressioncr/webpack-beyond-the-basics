@@ -1,10 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+// const HTMLWebpackPlugin = require('html-webpack-plugin')
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 
 module.exports = {
+  name: "client",
   entry: {
+    vendor: ["react", "react-dom"],
     main: [
       'webpack-hot-middleware/client?reload=true', 
       './src/index.js'
@@ -41,7 +44,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCSSExtractPlugin.loader,
           },
           {
             loader: 'css-loader'
@@ -52,7 +55,10 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: 'html-loader'
+            loader: "html-loader",
+            options: {
+              attrs: ["img:src"]
+            }
           }
         ]
       },
@@ -74,8 +80,12 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("development")
+        NODE_ENV: JSON.stringify("development"),
+        WEBPACK: true
       }
+    }),
+    new MiniCSSExtractPlugin({
+      filename: "[name].css"
     }),
     // new HTMLWebpackPlugin({
     //   template: './src/index.html'
