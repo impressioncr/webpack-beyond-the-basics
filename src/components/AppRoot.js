@@ -1,5 +1,6 @@
 import React from "react"
 const imagePath = require("../images/link.jpg")
+const MarkdownData = require("../../data/post.md")
 
 export default class extends React.Component {
 
@@ -7,8 +8,11 @@ export default class extends React.Component {
     return (
       <div className="profile">
         <img src={imagePath} />
-        <h1 className="h1">Beyond the Basics</h1>
-        <div className="content">webpack</div>
+        <h1 className="h1">{MarkdownData.title}</h1>
+        <div 
+          className="content"
+          dangerouslySetInnerHTML={{ __html: MarkdownData.__content }}
+        / >
       </div>
     )
   }
