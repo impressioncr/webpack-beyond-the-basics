@@ -1,6 +1,7 @@
 import React from "react"
 const imagePath = require("../images/link.jpg")
 const MarkdownData = require("../../data/post.md")
+import "../css/About.css"
 
 export default () => (
   <div className="profile">

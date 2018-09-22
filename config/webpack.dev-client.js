@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+// const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 // const HTMLWebpackPlugin = require('html-webpack-plugin')
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 
@@ -16,11 +16,11 @@ module.exports = {
   mode: 'development',
   output: {
     filename: '[name]-bundle.js',
+    chunkFilename: "[name].js",
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/'
   },
   devServer: {
-    port: 3000,
     contentBase: 'dist',
     overlay: true,
     hot: true,
@@ -44,22 +44,9 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCSSExtractPlugin.loader,
+            loader: "style-loader"
           },
-          {
-            loader: 'css-loader'
-          }
-        ]
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader",
-            options: {
-              attrs: ["img:src"]
-            }
-          }
+          { loader: "css-loader" }
         ]
       },
       {
@@ -92,14 +79,5 @@ module.exports = {
         WEBPACK: true
       }
     }),
-    new MiniCSSExtractPlugin({
-      filename: "[name].css"
-    }),
-    // new HTMLWebpackPlugin({
-    //   template: './src/index.html'
-    // }),
-    // new BundleAnalyzerPlugin({
-    //   generateStatsFile: true
-    // })
   ]
 }

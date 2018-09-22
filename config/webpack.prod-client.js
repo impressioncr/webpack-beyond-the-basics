@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-// const HTMLWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
@@ -17,6 +16,7 @@ module.exports = {
   mode: 'production',
   output: {
     filename: '[name]-bundle.js',
+    chunkFilename: "[name].js",
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/'
   },
@@ -26,7 +26,7 @@ module.exports = {
       cacheGroups: {
         vendor: {
           name: "vendor",
-          test: /[\\/]node_modules[\\/]/,
+          // test: /[\\/]node_modules[\\/]/,
           chunks: "initial",
           minChunks: 2
         }
@@ -85,21 +85,19 @@ module.exports = {
     ]
   },
   plugins: [
-    new OptimizeCssAssetsPlugin(),
-    new MiniCSSExtractPlugin({
-      filename: "[name]-[contenthash].css"
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require("cssnano"),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
     }),
+    new MiniCSSExtractPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         WEBPACK: true
       }
     }),
-    // new HTMLWebpackPlugin({
-    //   template: './src/index.html',
-    //   inject: true,
-    //   chunks: ["vendor", "main"]
-    // }),
     new UglifyJSPlugin(),
     new CompressionPlugin({
       algorithm: "gzip"
