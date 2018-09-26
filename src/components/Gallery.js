@@ -8,7 +8,7 @@ const getBundle = () => {
 }
 
 export default () => (
-  <div>
+  <div className="gallery">
     <h1 onClick={getBundle}>Gallery</h1>
   </div>
 )
