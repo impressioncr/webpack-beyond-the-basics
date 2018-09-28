@@ -4,6 +4,8 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
+// const ExtractCssChunks = require("extract-css-chunks-webpack-plugin")
+
 
 module.exports = {
   name: "client",
@@ -49,6 +51,7 @@ module.exports = {
         use: [
           {
             loader: MiniCSSExtractPlugin.loader,
+            // loader: ExtractCssChunks.loader,
           },
           {
             loader: 'css-loader'
@@ -91,6 +94,7 @@ module.exports = {
       cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true
     }),
+    // new ExtractCssChunks(),
     new MiniCSSExtractPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
